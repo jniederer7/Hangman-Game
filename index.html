@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+	<meta charset="UTF8">
+
+		<title>Basketball Hangman!</title>
+		<link rel="stylesheet" href="assets/reset.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="javascript" href="../assets/javascript.js">
+	</head>
+		<body>
+<style>
+body{
+	background: url(assets/images/basketball-court.png) no-repeat;
+}
+</style>
+	<h1 class="jumbotron col-md-12 text-center">Basketball!</h1>
+	<h2 class="text-center">Guess words from a basketball theme.<h2>
+
+<div class="text-center">
+
+
+
+
+<h3><span id="userText"></span></h3>
+<h3><span id="display"></span></h3>
+<h3>Guesses Left:<span id="guesses"></span></h3>
+</div>
+
+	<script type="text/javascript">
+
+		var options = ['Dribble', 'Layup' , 'Travel' , 'Tipoff' , 'Foul' , 'FreeThrow'];
+		var randomPick = options[Math.floor(Math.random()*options.length)];
+var word = randomPick.split([]);
+console.log(word)
+
+// Array that records user input
+var userArray = [];
+
+// Counts length of the word that is split
+var length = word.length;
+console.log(length)
+
+// Display length of word in HTML
+window.onload = function() {
+for (var i = 0; i < length; i++) {
+    word[i] = "_";
+}
+document.getElementById("display").innerHTML = word;
+}
+
+// Number of guesses
+var guesses = 15;
+
+// Store users inputs into userArray 
+document.onkeyup = function(input) {
+    console.log(input)
+    // var userInput = input.key;
+    var userInput = (input.key).toLowerCase();
+
+    //Record Countdown
+            if (input.key) {
+                guesses--;
+                console.log(guesses)
+
+                userArray.push(userInput);
+                console.log(userArray)
+
+                if (guesses === 0) {
+                    alert("Game Over!")
+                }
+            }
+
+            for (var i = 0; i < length; i++) {
+                if (userInput === word[i]) {
+                    userArray.push(userInput);
+                    console.log(userArray)
+                }
+            }
+
+            if (userArray.length === word.length) {
+                alert("you win!")
+            }
+
+    // Display guess in guesses HTML
+    document.getElementById("userText").innerHTML = userArray;
+    // Display guesses left in HTML
+    document.getElementById('guesses').innerHTML = guesses;
+}
+
+</script>
+</body>
+</html>
